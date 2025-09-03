@@ -90,17 +90,17 @@ function getDataBase(index) {
       icon: "./StarRailRes/" + data["characters"][index]["light_cone"]["preview"],
       attributes: [
         {
-          name: data["characters"][index]["light_cone"]["attributes"][0]["name"],
+          name: cleanAffixName(data["characters"][index]["light_cone"]["attributes"][0]["name"]),
           icon: "./StarRailRes/" + data["characters"][index]["light_cone"]["attributes"][0]["icon"],
           val: data["characters"][index]["light_cone"]["attributes"][0]["display"],
         },
         {
-          name: data["characters"][index]["light_cone"]["attributes"][1]["name"],
+          name: cleanAffixName(data["characters"][index]["light_cone"]["attributes"][1]["name"]),
           icon: "./StarRailRes/" + data["characters"][index]["light_cone"]["attributes"][1]["icon"],
           val: data["characters"][index]["light_cone"]["attributes"][1]["display"],
         },
         {
-          name: data["characters"][index]["light_cone"]["attributes"][2]["name"],
+          name: cleanAffixName(data["characters"][index]["light_cone"]["attributes"][2]["name"]),
           icon: "./StarRailRes/" + data["characters"][index]["light_cone"]["attributes"][2]["icon"],
           val: data["characters"][index]["light_cone"]["attributes"][2]["display"],
         },
@@ -119,10 +119,7 @@ function getDataBase(index) {
         part: data["characters"][index]["relics"][i]["type"],
         main_affix: {
           type: data["characters"][index]["relics"][i]["main_affix"]["type"],
-          name: data["characters"][index]["relics"][i]["main_affix"]["name"]
-            .replace(/..?属性ダメージ/, "属性ダメ")
-            .replace("会心ダメージ", "会心ダメ")
-            .replace("EP回復効率", "EP回復"),
+          name: cleanAffixName(data["characters"][index]["relics"][i]["main_affix"]["name"]),
           icon: "./StarRailRes/" + data["characters"][index]["relics"][i]["main_affix"]["icon"],
           val: data["characters"][index]["relics"][i]["main_affix"]["value"],
           dis: data["characters"][index]["relics"][i]["main_affix"]["display"],
@@ -144,7 +141,7 @@ function getDataBase(index) {
         for (let j = 0; j < data["characters"][index]["relics"][i]["sub_affix"].length; j++) {
           json["relics"][i]["sub_affix"][j] = {
             type: data["characters"][index]["relics"][i]["sub_affix"][j]["type"],
-            name: data["characters"][index]["relics"][i]["sub_affix"][j]["name"].replace("会心ダメージ", "会心ダメ"),
+            name: cleanAffixName(data["characters"][index]["relics"][i]["sub_affix"][j]["name"]),
             icon: "./StarRailRes/" + data["characters"][index]["relics"][i]["sub_affix"][j]["icon"],
             val: data["characters"][index]["relics"][i]["sub_affix"][j]["value"],
             dis: data["characters"][index]["relics"][i]["sub_affix"][j]["display"],
@@ -157,7 +154,7 @@ function getDataBase(index) {
   let obj = [];
   for (let i = 0; i < data["characters"][index]["additions"].length; i++) {
     obj.push({
-      name: data["characters"][index]["additions"][i]["name"].replace(/..?属性ダメージ/, "属性ダメ").replace("会心ダメージ", "会心ダメ"),
+      name: cleanAffixName(data["characters"][index]["additions"][i]["name"].replace(/..?属性ダメージ/, "属性ダメ")),
       icon: "./StarRailRes/" + data["characters"][index]["additions"][i]["icon"],
       val: data["characters"][index]["additions"][i]["display"],
     });
@@ -445,4 +442,12 @@ function loadImage(src) {
     img.onload = () => resolve(img);
     img.onerror = reject;
   });
+}
+
+function cleanAffixName(name) {
+  return name
+    .replace(/..?属性ダメージ/, "属性ダメ")
+    .replace("会心ダメージ", "会心ダメ")
+    .replace("EP回復効率", "EP回復")
+    .replace("基礎", "");
 }
