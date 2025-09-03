@@ -25,3 +25,24 @@ canvas {
   width: 10%;
   margin: 10px;
 }
+
+.loader {
+  border: 8px solid #8bdaff;
+  border-radius: 50%;
+  border-right: 8px solid #ffffff;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

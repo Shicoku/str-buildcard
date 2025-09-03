@@ -3,8 +3,10 @@ let apiData = null;
 async function getData() {
   const uid = document.getElementById("uid").value;
   const char = document.getElementById("char");
+  const card = document.getElementById("card-img");
+  card.innerHTML = "";
 
-  char.innerHTML = "キャラクターを取得中...";
+  char.innerHTML = '<div class="loader"></div>';
 
   try {
     const res = await fetch(`/api/mihomo?uid=${uid}`);
@@ -227,7 +229,7 @@ async function createImg(index) {
   const card = document.getElementById("card-img");
   const card_img = document.createElement("img");
 
-  card.innerHTML = "画像を生成中...";
+  card.innerHTML = '<div class="loader"></div>';
 
   const json = await getDataScore(index);
 
