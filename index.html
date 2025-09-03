@@ -2,14 +2,33 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>MiHoMo ニックネーム表示</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ビルドカード</title>
+
+    <link rel="icon" type="image/png" href="./img/shicoku.png" />
+    <link rel="shortcut icon" type="image/png" href="./img/shicoku.png" />
+    <link rel="apple-touch-icon" href="./img/shicoku.png" />
+
+    <!--styles-->
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
-    <h1>プレイヤー名を取得</h1>
+    <h1>崩壊: スターレイル ビルドカード生成</h1>
     <input type="text" id="uid" placeholder="UIDを入力" />
-    <button onclick="fetchName()">取得</button>
-    <p id="nickname"></p>
+    <button onclick="getData()">取得</button>
+    <div id="char"></div>
+    <div><canvas id="card" width="1920" height="1080"></canvas></div>
+    <div id="card-img"></div>
 
     <script src="scripts/index.js"></script>
+    <script>
+      const input = document.getElementById("uid");
+      input.value = localStorage.getItem("uid") || "";
+      input.addEventListener("input", () => {
+        localStorage.setItem("uid", input.value);
+      });
+    </script>
   </body>
 </html>
