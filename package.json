@@ -8,9 +8,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch",
-    "test": "nodemon test/dev-proxy.js",
-    "start": "concurrently \"npm run dev\" \"npm run test\""
+    "ts-watch": "tsc --watch",
+    "dev": "nodemon tools/dev-proxy.js",
+    "start": "concurrently \"npm run ts-watch\" \"npm run dev\""
   },
   "keywords": [],
   "author": "",
