@@ -3,9 +3,6 @@ import { loadImage } from "./loadImage.js";
 
 export async function renderImg(data: charData): Promise<any> {
   const card = document.getElementById("card-img") as HTMLElement;
-  const card_img = document.createElement("img");
-
-  card.innerHTML = '<div class="loader"></div>';
 
   const canvas = document.getElementById("card") as HTMLCanvasElement;
   const ctx = canvas.getContext("2d");
@@ -207,8 +204,5 @@ export async function renderImg(data: charData): Promise<any> {
     }
   }
 
-  card_img.src = canvas.toDataURL("image/png");
-  card_img.className = "card-img";
-  card.innerHTML = "";
-  card.appendChild(card_img);
+  return canvas;
 }

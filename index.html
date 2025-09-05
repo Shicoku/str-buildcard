@@ -14,6 +14,16 @@
     <!--styles-->
     <link rel="stylesheet" href="styles/style.css" />
   </head>
+  <header>
+    <div class="header">
+      <ul>
+        <li><a href="/">ホーム</a></li>
+        <li><a href="help.html">使い方</a></li>
+        <li><a href="readme">利用規約</a></li>
+        <li><a href="feedback">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </header>
   <body>
     <p class="title">ビルドカード生成機</p>
     <form id="form">
@@ -22,8 +32,15 @@
     </form>
 
     <div id="char"></div>
+
     <div><canvas id="card" width="1920" height="1080"></canvas></div>
     <div id="card-img"></div>
+
+    <div id="loader">
+      <div class="spinner-box">
+        <div class="spinner"></div>
+      </div>
+    </div>
 
     <script type="module" src="./dist/index.js"></script>
     <script>
