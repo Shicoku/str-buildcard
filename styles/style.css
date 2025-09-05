@@ -4,7 +4,8 @@
 }
 
 body {
-  margin-left: 30px;
+  font-family: "kt";
+  margin-left: 3%;
 }
 
 img {
@@ -13,6 +14,62 @@ img {
 
 canvas {
   display: none;
+}
+
+.title {
+  font-size: 3em;
+  border-bottom: 2px solid #55ddff;
+  width: 97%;
+}
+
+#form {
+  display: flex;
+  height: 50px;
+  width: 280px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px #00000075;
+  margin-left: 40px;
+}
+#uid {
+  font-family: "kt";
+  font-size: 1.01em;
+  width: 200px;
+  padding: 0 15px;
+  border-radius: 5px 0 0 5px;
+  border: #55ddff 3px solid;
+  outline: 0;
+}
+#btn {
+  width: 50px;
+  border-radius: 0 5px 5px 0;
+  background: #55ddff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+#btn:hover {
+  opacity: 0.5;
+}
+.search {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  position: relative;
+  top: -2px;
+  left: -5px;
+}
+.search::after {
+  content: "";
+  display: inline-block;
+  transform: rotate(-55deg);
+  position: relative;
+  background: #fff;
+  width: 3px;
+  height: 13px;
+  top: 10px;
+  left: 13px;
 }
 
 .card-img {
@@ -27,7 +84,7 @@ canvas {
 }
 
 .loader {
-  border: 8px solid #8bdaff;
+  border: 8px solid #55ddff;
   border-radius: 50%;
   border-right: 8px solid #ffffff;
   width: 20px;

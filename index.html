@@ -15,9 +15,12 @@
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
-    <h1>崩壊: スターレイル ビルドカード生成</h1>
-    <input type="text" id="uid" placeholder="UIDを入力" />
-    <button onclick="getData()">取得</button>
+    <p class="title">ビルドカード生成機</p>
+    <form id="form">
+      <input id="uid" type="text" placeholder="UIDを入力" />
+      <button id="btn" type="button" onclick="getData()"><span class="search"></span></button>
+    </form>
+
     <div id="char"></div>
     <div><canvas id="card" width="1920" height="1080"></canvas></div>
     <div id="card-img"></div>
