@@ -24,10 +24,6 @@ li a:hover {
   opacity: 0.5;
 }
 
-/* img {
-  width: 100%;
-} */
-
 canvas {
   display: none;
 }
@@ -123,7 +119,7 @@ canvas {
 }
 
 .card-img {
-  width: 88%;
+  width: 58%;
   border-radius: 5px;
   margin-left: 45px;
 }
@@ -164,5 +160,37 @@ canvas {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    display: none;
+  }
+
+  .title {
+    font-size: 2.5em;
+    border-bottom: 2px solid #55ddff;
+    width: 97%;
+    margin-top: 20px;
+  }
+
+  #char {
+    margin: 10px;
+    margin-left: 20px;
+    margin-top: 30px;
+  }
+
+  .char_img {
+    width: 70px;
+  }
+  .char_img:hover {
+    opacity: 0.5;
+  }
+
+  .card-img {
+    width: 88%;
+    border-radius: 5px;
+    margin-left: 20px;
   }
 }
