@@ -26,10 +26,20 @@
   </header>
   <body>
     <p class="title">ビルドカード生成機</p>
-    <form id="form">
-      <input id="uid" type="text" placeholder="UIDを入力" />
-      <button id="btn" type="button" onclick="getData()"><span class="search"></span></button>
-    </form>
+    <div class="uidBox">
+      <form id="form">
+        <input id="uid" type="text" placeholder="UIDを入力" />
+        <button id="btn" type="button" onclick="getData()"><span class="search"></span></button>
+      </form>
+
+      <div id="countdownCircle" class="circle-wrapper">
+        <svg viewBox="0 0 100 100" width="100" height="100">
+          <circle class="bg" cx="50" cy="50" r="45" />
+          <circle class="fg" cx="50" cy="50" r="45" />
+        </svg>
+        <span class="count-text">30</span>
+      </div>
+    </div>
 
     <div id="char"></div>
 

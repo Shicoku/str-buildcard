@@ -59,6 +59,11 @@ progress::-moz-progress-bar {
   margin-top: -10px;
 }
 
+.uidBox {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
 #form {
   display: flex;
   height: 50px;
@@ -107,6 +112,48 @@ progress::-moz-progress-bar {
   height: 13px;
   top: 10px;
   left: 13px;
+}
+.locked {
+  opacity: 0.5;
+}
+
+#countdownCircle {
+  display: none;
+}
+.circle-wrapper {
+  width: 50px;
+  height: 50px;
+  margin-left: 12px;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+circle {
+  fill: none;
+  stroke-width: 6;
+}
+.bg {
+  stroke-width: 7px;
+  stroke: #ddd;
+}
+.fg {
+  stroke: #55ddff;
+  stroke-width: 7px;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+.count-text {
+  position: absolute;
+  top: 19.4%;
+  left: 32.2%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #333;
+  pointer-events: none;
 }
 
 #char {

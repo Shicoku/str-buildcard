@@ -6,14 +6,23 @@ import { charData } from "./types/starrail.js";
 
 const loader = document.getElementById("loader") as HTMLElement;
 const bar = document.getElementById("progress") as HTMLElement;
+const circle = document.getElementById("countdownCircle") as HTMLElement;
+
 let apiData: any = null;
+let selectedIndex: any = null;
+let isLock = false;
+let lockDuration = 30;
+let countdownInterval: any;
 
 loader.style.display = "none";
+circle.style.display = "none";
 
 async function getData(): Promise<any> {
   const uid = (document.getElementById("uid") as HTMLInputElement).value;
   const char = document.getElementById("char") as HTMLElement;
-  const card = document.getElementById("card") as HTMLElement;
+  const card = document.getElementById("card-img") as HTMLElement;
+
+  if (isLock) return;
 
   loader.style.display = "flex";
   bar.style.display = "none";
@@ -70,6 +79,42 @@ async function getData(): Promise<any> {
     loader.style.display = "flex";
     char.innerHTML = `<p>Error: ${(err as Error).message}</p>`;
   }
+
+  const btn = document.getElementById("btn") as HTMLElement;
+  const fgCircle = document.querySelector(".fg") as HTMLElement;
+  const countText = document.querySelector(".count-text") as HTMLElement;
+
+  isLock = true;
+  btn.classList.add("locked");
+  let remaining = lockDuration;
+  circle.style.display = "flex";
+
+  fgCircle.style.transition = "none";
+  fgCircle.style.strokeDashoffset = "0";
+  countText.textContent = `${remaining}`;
+  console.log(remaining);
+
+  setTimeout(() => {
+    fgCircle.style.transition = `stroke-dashoffset ${lockDuration}s linear`;
+    fgCircle.style.strokeDashoffset = "283";
+  }, 50);
+
+  countdownInterval = setInterval(() => {
+    remaining--;
+    countText.textContent = `${remaining}`;
+    console.log(remaining);
+
+    if (remaining <= 0) {
+      clearInterval(countdownInterval);
+      countText.textContent = "";
+      fgCircle.style.transition = "none";
+      fgCircle.style.strokeDashoffset = "0";
+      circle.style.display = "none";
+
+      isLock = false;
+      btn.classList.remove("locked");
+    }
+  }, 1000);
 }
 
 function getCharData(index: number): Promise<charData | null> {
@@ -86,8 +131,12 @@ async function createCard(index: number, link: any): Promise<any> {
   const card_img = document.createElement("img");
   const buttons = document.querySelectorAll(".char_button");
 
+  if (selectedIndex === index) return;
+
   loader.style.display = "flex";
   bar.style.display = "flex";
+
+  selectedIndex = index;
 
   buttons.forEach((btn) => btn.classList.remove("selected"));
   link.classList.add("selected");
