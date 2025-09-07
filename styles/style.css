@@ -148,12 +148,12 @@ circle {
 }
 .count-text {
   position: absolute;
-  top: 19.4%;
-  left: 21.6%;
   transform: translate(-50%, -50%);
   font-size: 18px;
   color: #333;
   pointer-events: none;
+  margin-left: 25px;
+  margin-top: 23px;
 }
 
 #char {
