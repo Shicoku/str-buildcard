@@ -1,8 +1,12 @@
 import { charData } from "../types/starrail.js";
 import { loadImage } from "./loadImage.js";
+import { progress } from "./progress.js";
 
 export async function renderImg(data: charData): Promise<any> {
   const card = document.getElementById("card-img") as HTMLElement;
+  const bar = document.getElementById("progress") as HTMLElement;
+
+  progress(bar, 0);
 
   const canvas = document.getElementById("card") as HTMLCanvasElement;
   const ctx = canvas.getContext("2d");
@@ -15,17 +19,27 @@ export async function renderImg(data: charData): Promise<any> {
   const back = await loadImage("../../assets/img/back.png");
   ctx.drawImage(back, 0, 0, 1920, 1080);
 
+  progress(bar, 10);
+
   const icon = (await loadImage(data["icon"])) as HTMLImageElement;
   ctx.drawImage(icon, 200, -90, icon.width / 1.5, icon.height / 1.5);
+
+  progress(bar, 15);
 
   const element = (await loadImage(data["element"])) as HTMLImageElement;
   ctx.drawImage(element, 160, 75, element.width / 5, element.height / 5);
 
+  progress(bar, 20);
+
   const path = (await loadImage(data["path"])) as HTMLImageElement;
   ctx.drawImage(path, 220, 79, path.width / 10, path.height / 10);
 
+  progress(bar, 25);
+
   const front = await loadImage("../../assets/img/front.png");
   ctx.drawImage(front, 0, 0, 1920, 1080);
+
+  progress(bar, 30);
 
   let inter = data.status.length === 11 ? 55 : data.status.length === 10 ? 60 : 65;
   for (let i = 0; i < data.status.length; i++) {
@@ -69,6 +83,8 @@ export async function renderImg(data: charData): Promise<any> {
     }
   }
 
+  progress(bar, 40);
+
   for (let i = 0; i < data["skill"].length; i++) {
     const img = (await loadImage(data["skill"][i]["icon"])) as HTMLImageElement;
     ctx.drawImage(img, 540, 220 + i * 150, img.width / 1.3, img.height / 1.3);
@@ -80,6 +96,8 @@ export async function renderImg(data: charData): Promise<any> {
     ctx.fillText(level, x, 355 + i * 150);
   }
 
+  progress(bar, 50);
+
   for (let i = 0; i < data["rank_icons"].length; i++) {
     const rank_icon = (await loadImage(data["rank_icons"][i]["icon"])) as HTMLImageElement;
     ctx.drawImage(rank_icon, 1100, 130 + i * 150, rank_icon.width / 1.3, rank_icon.height / 1.3);
@@ -88,6 +106,8 @@ export async function renderImg(data: charData): Promise<any> {
       ctx.drawImage(rank_lock, 1100, 130 + i * 150, rank_lock.width / 1.3, rank_lock.height / 1.3);
     }
   }
+
+  progress(bar, 60);
 
   if (data["relics"]) {
     for (let i = 0; i < data["relics"].length; i++) {
@@ -128,6 +148,8 @@ export async function renderImg(data: charData): Promise<any> {
     }
   }
 
+  progress(bar, 70);
+
   if (data["relic_sets"]) {
     let i = 0;
     let point = 0;
@@ -145,6 +167,8 @@ export async function renderImg(data: charData): Promise<any> {
     }
   }
 
+  progress(bar, 80);
+
   ctx.font = '60px "kt"';
   ctx.textAlign = "start";
   ctx.fillStyle = "rgb(255, 255, 255)";
@@ -156,6 +180,8 @@ export async function renderImg(data: charData): Promise<any> {
   ctx.fillText("Lv. " + data["level"], 45, 120);
   ctx.strokeStyle = "rgb(255, 255, 255)";
   ctx.strokeText("Lv. " + data["level"], 45, 120);
+
+  progress(bar, 85);
 
   // スコア描画
   ctx.font = '40px "kt"';
@@ -176,6 +202,8 @@ export async function renderImg(data: charData): Promise<any> {
   ctx.fillText(scoreRank, 920, 1030);
   ctx.strokeStyle = "rgb(255, 255, 255)";
   ctx.strokeText(scoreRank, 920, 1030);
+
+  progress(bar, 90);
 
   // 遺物スコア描画
   if (data["relics"]) {
@@ -203,6 +231,8 @@ export async function renderImg(data: charData): Promise<any> {
       ctx.strokeText(scoreRank, 1830, 180 + i * 170);
     }
   }
+
+  progress(bar, 100);
 
   return canvas;
 }

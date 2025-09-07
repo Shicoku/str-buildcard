@@ -5,6 +5,7 @@ import { ApiError } from "./errors/ApiError.js";
 import { charData } from "./types/starrail.js";
 
 const loader = document.getElementById("loader") as HTMLElement;
+const bar = document.getElementById("progress") as HTMLElement;
 let apiData: any = null;
 
 loader.style.display = "none";
@@ -15,12 +16,15 @@ async function getData(): Promise<any> {
   const card = document.getElementById("card") as HTMLElement;
 
   loader.style.display = "flex";
+  bar.style.display = "none";
+
   char.innerHTML = "";
   card.innerHTML = "";
 
   try {
     const res = await fetch(`/api/mihomo?uid=${uid}`);
     if (!res.ok) {
+      loader.style.display = "flex";
       throw new ApiError(`Fetch failed: ${res.statusText}`, res.status);
     }
     const data = await res.json();
@@ -31,6 +35,7 @@ async function getData(): Promise<any> {
     apiData = data;
 
     if (data.error || !data.characters) {
+      loader.style.display = "flex";
       char.innerHTML = `<p>Error: ${data.error}</p>`;
       return;
     }
@@ -62,6 +67,7 @@ async function getData(): Promise<any> {
       char.appendChild(wrapper);
     });
   } catch (err) {
+    loader.style.display = "flex";
     char.innerHTML = `<p>Error: ${(err as Error).message}</p>`;
   }
 }
@@ -81,6 +87,7 @@ async function createCard(index: number, link: any): Promise<any> {
   const buttons = document.querySelectorAll(".char_button");
 
   loader.style.display = "flex";
+  bar.style.display = "flex";
 
   buttons.forEach((btn) => btn.classList.remove("selected"));
   link.classList.add("selected");

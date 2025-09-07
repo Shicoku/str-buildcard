@@ -28,6 +28,24 @@ canvas {
   display: none;
 }
 
+progress {
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+}
+progress::-webkit-progress-bar {
+  border-radius: 10px;
+  background-color: #fff;
+}
+progress::-webkit-progress-value {
+  border-radius: 10px;
+  background-color: #55ddff;
+}
+progress::-moz-progress-bar {
+  border-radius: 10px;
+  background-color: #55ddff;
+}
+
 .header {
   margin-top: 20px;
   margin-right: 3%;
@@ -142,6 +160,7 @@ canvas {
   border-radius: 12px;
   box-shadow: 0px 4px 12px #00000083;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -152,6 +171,14 @@ canvas {
   width: 20px;
   height: 20px;
   animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  margin-bottom: 20px;
+}
+#progress {
+  width: 80%;
+  height: 8px;
+  appearance: none;
+  overflow: hidden;
+  margin-left: 10px;
 }
 
 @keyframes spin {
