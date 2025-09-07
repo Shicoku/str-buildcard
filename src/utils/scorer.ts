@@ -4,8 +4,8 @@ type WeightMap = Record<string, any>;
 
 export async function calculateScore(json: charData): Promise<charData> {
   const weight = await (await fetch("../../StarRailScore/score.json")).json();
-  const weight_none = await (await fetch("../../assets/none.json")).json();
-  const maxVal = await (await fetch("../../assets/max_value.json")).json();
+  const weight_none = await (await fetch("../../assets/data/none.json")).json();
+  const maxVal = await (await fetch("../../assets/data/max_value.json")).json();
 
   let totalScore = 0;
 

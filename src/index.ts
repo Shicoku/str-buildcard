@@ -92,7 +92,6 @@ async function getData(): Promise<any> {
   fgCircle.style.transition = "none";
   fgCircle.style.strokeDashoffset = "0";
   countText.textContent = `${remaining}`;
-  console.log(remaining);
 
   setTimeout(() => {
     fgCircle.style.transition = `stroke-dashoffset ${lockDuration}s linear`;
@@ -102,7 +101,6 @@ async function getData(): Promise<any> {
   countdownInterval = setInterval(() => {
     remaining--;
     countText.textContent = `${remaining}`;
-    console.log(remaining);
 
     if (remaining <= 0) {
       clearInterval(countdownInterval);
