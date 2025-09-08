@@ -533,4 +533,12 @@ textarea {
     margin-top: 10px;
     margin-left: 0px;
   }
+
+  #progress {
+    width: 80%;
+    height: 8px;
+    appearance: none;
+    overflow: hidden;
+    margin-left: 0px;
+  }
 }
