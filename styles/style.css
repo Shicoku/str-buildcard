@@ -15,15 +15,6 @@ a {
   color: #000;
 }
 
-ul li {
-  display: inline-block;
-  list-style: none;
-  padding-right: 15px;
-}
-li a:hover {
-  opacity: 0.5;
-}
-
 canvas {
   display: none;
 }
@@ -46,6 +37,18 @@ progress::-moz-progress-bar {
   background-color: #55ddff;
 }
 
+h1 {
+  margin-top: 20px;
+}
+
+.header-ul li {
+  display: inline-block;
+  list-style: none;
+  padding-right: 15px;
+}
+.header-ul li a:hover {
+  opacity: 0.5;
+}
 .header {
   margin-top: 20px;
   margin-right: 3%;
@@ -57,6 +60,13 @@ progress::-moz-progress-bar {
   border-bottom: 2px solid #55ddff;
   width: 97%;
   margin-top: -10px;
+}
+.title2 {
+  margin: auto;
+  margin-top: 10px;
+  font-size: 3rem;
+  width: fit-content;
+  border-bottom: 5px solid rgb(85, 221, 255);
 }
 
 .uidBox {
@@ -226,6 +236,99 @@ circle {
   appearance: none;
   overflow: hidden;
   margin-left: 10px;
+}
+
+.terms {
+  margin-left: 10px;
+}
+.terms p {
+  font-size: 1.2rem;
+  margin-top: -20px;
+  margin-left: 15px;
+}
+
+.here {
+  color: #55ddff;
+}
+
+.link {
+  border-bottom: 2px solid #55ddff;
+  width: fit-content;
+}
+.link:hover {
+  color: #55ddff;
+  opacity: 0.5;
+}
+
+.img {
+  width: 50%;
+}
+
+.jax {
+  font-size: 1.3rem;
+  background: #d3d3d397;
+  padding: 3px 5px 3px 5px;
+}
+
+.mini {
+  color: #919191;
+  font-size: 0.9rem;
+  margin-top: -15px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 50%;
+  font-family: "kt";
+}
+th,
+td {
+  border: 2px solid #ababab;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+thead {
+  background-color: #55ddff;
+  color: #333333;
+}
+
+#contactForm {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 10px;
+}
+label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+#contactForm input,
+textarea {
+  margin-top: -20px;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 3px solid #55ddff;
+  border-radius: 12px;
+  outline: none;
+}
+textarea {
+  height: 120px;
+  resize: none;
+}
+.form-btn {
+  align-self: center;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  background: #fff;
+  border: 3px solid #55ddff;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: "kt";
 }
 
 @keyframes spin {

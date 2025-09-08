@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ビルドカード生成機</title>
+
+    <link rel="icon" type="image/png" href=".//assets/img/shicoku.png" />
+    <link rel="shortcut icon" type="image/png" href="../assets/img/shicoku.png" />
+    <link rel="apple-touch-icon" href="../assets/img/shicoku.png" />
+
+    <!--styles-->
+    <link rel="stylesheet" href="../styles/style.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <p class="title">プライバシーポリシー</p>
+    <div class="terms">
+      <p>本プライバシーポリシーは、本サービスにおけるユーザー情報の取り扱いについて定めるものです。
+        <br><a href="./terms.html" class="link">利用規約</a>についてはこちらを参照してください。
+      </p>
+      <h1>第一条: 基本方針</h1>
+      <p>本サービスは、ユーザーのプライバシーを尊重し、個人情報の収集・保存・利用を一切行いません。
+        <br>取得する情報は、ゲーム内で公開されているUIDやプロフィールなど、誰でも閲覧可能な情報に限られます。
+      </p>
+      <h1>第二条: 取得する情報</h1>
+      <p>本サービスが取得・利用する情報は以下のとおりです。
+        <ul>
+          <li>ユーザーが入力したUID</li>
+          <li>ゲーム内で公開されているプロフィール情報(ニックネーム、アイコン、サポートキャラなど)</li>
+        </ul>
+        ※これらの情報は、MiHoMoAPIから取得できるものであり、個人を特定する情報は含まれていません。
+      </p>
+      <h1>第三条: 情報の利用目的</h1>
+      <p>取得した情報は以下の目的にのみ使用されます。
+        <ul>
+          <li>ゲーム内の公開情報に基づくビルドカードの生成</li>
+        </ul>
+        本サービスは、取得した情報を第三者に提供・販売・共有することはありません。
+      </p>
+      <h1>第四条: 外部サービスとの連携</h1>
+      <p>本サービスは、外部の分析ツール・広告サービス・SNS連携を一切使用しておらず、ユーザーの行動履歴や個人情報を外部に送信することはありません。</p>
+      <h1>第五条: 免責事項</h1>
+      <p>
+        <ul>
+          <li>本サービスは、ゲームの仕様変更やAPIの停止により、利用不可になる場合があります。</li>
+          <li>ユーザーが入力したUIDが他人のものであった場合でも、本サービスは責任を負いません。</li>
+        </ul>
+      </p>
+      <h1>第六条: ポリシーの変更</h1>
+      <p>本ポリシーは、予告なく変更される場合があります。変更後のポリシーは本サービス上に掲示された時点で効力を生じます。</p>
+      <h1>第七条: お問い合わせ</h1>
+      <p>本サーピスに関するご質問・意見は、<a href="../feedback.html" class="link">お問い合わせページ</a>までお願いいたします。</p>
+    </div>
+
+    <script>
+      const header = document.getElementById("header");
+      fetch("../assets/includes/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          header.innerHTML = html;
+
+          const page = location.pathname.split("/");
+          const links = header.querySelectorAll("a[data-page]");
+          links.forEach((link) => {
+            if (link.getAttribute("data-page") === page[1]) {
+              link.classList.add("here");
+            }
+          });
+        });
+    </script>
+  </body>
+</html>

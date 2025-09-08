@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ビルドカード生成機</title>
+
+    <link rel="icon" type="image/png" href="./assets/img/shicoku.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/img/shicoku.png" />
+    <link rel="apple-touch-icon" href="./assets/img/shicoku.png" />
+
+    <!--styles-->
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+    <div id="header"></div>
+    <p class="title2">お問い合わせ</p>
+
+    <form id="contactForm">
+      <label for="name">お名前 (任意)</label>
+      <input type="text" name="name" placeholder="お名前" />
+      <label class="mini">個人情報は入力しないでください</label>
+      <label for="email">メールアドレス (任意)</label>
+      <input type="email" name="email" placeholder="メールアドレス" />
+      <label class="mini">返信は必要な場合のみ行います。</label>
+      <label for="message">お問い合わせ内容 (必須)</label>
+      <textarea name="message" placeholder="お問い合わせ内容" required></textarea>
+      <label class="mini">個人情報は入力しないでください</label>
+      <button type="submit" class="form-btn">送信</button>
+      <label>お問い合わせは上記または<a href="https://x.com/Sck_Day" class="link">XのDM</a>までお願いします。</label>
+    </form>
+
+    <div id="loader">
+      <div class="spinner-box">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <script>
+      const loader = document.getElementById("loader");
+
+      document.getElementById("contactForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        loader.style.display = "flex";
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+
+        const res = await fetch("/api/feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          loader.style.display = "none";
+          alert("送信完了しました！");
+        } else {
+          loader.style.display = "none";
+          alert("送信に失敗しました。");
+        }
+      });
+    </script>
+
+    <script>
+      const header = document.getElementById("header");
+      fetch("./assets/includes/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          header.innerHTML = html;
+
+          const page = location.pathname.split("/").pop().replace(".html", "");
+          const links = header.querySelectorAll("a[data-page]");
+          links.forEach((link) => {
+            if (link.getAttribute("data-page") === page) {
+              link.classList.add("here");
+            }
+          });
+        });
+    </script>
+  </body>
+</html>

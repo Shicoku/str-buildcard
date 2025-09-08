@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ビルドカード生成機</title>
+
+    <link rel="icon" type="image/png" href=".//assets/img/shicoku.png" />
+    <link rel="shortcut icon" type="image/png" href="../assets/img/shicoku.png" />
+    <link rel="apple-touch-icon" href="../assets/img/shicoku.png" />
+
+    <!--styles-->
+    <link rel="stylesheet" href="../styles/style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div id="header"></div>
+    <p class="title">使い方</p>
+    <div class="terms">
+      <h1>ゲーム側の設定</h1>
+      <p>
+        ゲーム側の設定を行います。以下の画像の右側の赤線にサポート、同伴キャラをそれぞれ3人、5人設定します。
+        <img src="../assets/img/howto.png" alt="howto" class="img" />
+        <br />設定が完了したら、左下のUIDをコピーしましょう。
+      </p>
+      <h1>ツール</h1>
+      <p>
+        テキストボックス内にコピーしたUIDを入力し、検索ボタンを押しましょう。
+        <img src="../assets/img/box.png" alt="box" class="img" />
+        <br />プレイヤー情報やキャラクター情報が取得され、サポート、同伴に設定したキャラの一覧が表示されます。
+        <img src="../assets/img/char.png" alt="char" class="img" />
+        <br />ビルドカードを生成したいキャラのアイコンを押すことでビルドカードを生成できます。
+        <img src="../assets/img/card.png" alt="card" class="img" />
+        <br>ビルドカードは右クリックまたは長押しで保存・コピーが可能です。
+      </p>
+      <h1>注意</h1>
+      <p>ビルドカードを生成する場合は、必ず<a href="../legal/terms.html" class="link">利用規約</a>に同意のうえご利用ください。
+      <br>また、使用時には以下のことに注意してください。
+        <ul>
+          <li>ゲーム内に更新があった場合、必ず5分程度時間を開けてください。</li>
+          <li>UIDの取得は30秒おきにできるようになります。</li>
+          <li>ビルドカードの生成には少し時間がかかる場合があります。</li>
+          <li>一部、描画の遅れでフォントが反映されない場合があります。</li>
+        </ul>
+      </p>
+      <h1>スコア計算、評価について</h1>
+      <p>本サービスでは以下のような計算式を使用しています。
+        <br><br>メインステータス
+        <br><span class="jax">\( \text{スコア} = (\text{遺物のレベル} + 1) \div 16 \times \text{重要度} \times 100 \)</span>
+
+        <br><br>サブステータス
+        <br><span class="jax">\( \text{スコア} = \text{値} \div \text{理論上の最大値} \times \text{重要度} \times 100 \)</span>
+
+        <br><br>最終的なスコア
+        <br><span class="jax">\( \text{遺物スコア} = \text{メインスコア} \times 0.5 + \text{サブスコア} \times 0.5 \)</span>
+
+        <br><br>スコアの評価については以下の表を参照してください。
+        <table>
+          <thead>
+            <tr>
+              <th>評価</th>
+              <th>遺物</th>
+              <th>総合</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SS</td>
+              <td>100 ~</td>
+              <td>600 ~</td>
+            </tr>
+            <tr>
+              <td>S</td>
+              <td>90 ~</td>
+              <td>540 ~</td>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td>60 ~</td>
+              <td>360 ~</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>40 ~</td>
+              <td>240 ~</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>10 ~</td>
+              <td>60 ~</td>
+            </tr>
+            <tr>
+              <td>D</td>
+              <td>0 ~</td>
+              <td>0 ~</td>
+            </tr>
+          </tbody>
+        </table>
+      </p>
+    </div>
+    <script>
+      const header = document.getElementById("header");
+      fetch("../assets/includes/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          header.innerHTML = html;
+
+          const page = location.pathname.split("/");
+          const links = header.querySelectorAll("a[data-page]");
+          links.forEach((link) => {
+            if (link.getAttribute("data-page") === page[1]) {
+              link.classList.add("here");
+            }
+          });
+        });
+    </script>
+  </body>
+</html>
