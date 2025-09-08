@@ -539,6 +539,6 @@ textarea {
     height: 8px;
     appearance: none;
     overflow: hidden;
-    margin-left: 0px;
+    margin-left: 5px;
   }
 }
