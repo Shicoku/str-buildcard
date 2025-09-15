@@ -3,7 +3,7 @@ import { charData } from "../types/starrail.js";
 type WeightMap = Record<string, any>;
 
 export async function calculateScore(json: charData): Promise<charData> {
-  const weight = await (await fetch("../../StarRailScore/score.json")).json();
+  const weight = await (await fetch("../../submodule/StarRailScore/score.json")).json();
   const weight_none = await (await fetch("../../assets/data/none.json")).json();
   const maxVal = await (await fetch("../../assets/data/max_value.json")).json();
 

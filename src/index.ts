@@ -38,7 +38,7 @@ async function getData(): Promise<any> {
     }
     const data = await res.json();
     const characters = data.characters;
-    const baseUrl = "StarRailRes/";
+    const baseUrl = "submodule/StarRailRes/";
     char.innerHTML = "";
 
     apiData = data;

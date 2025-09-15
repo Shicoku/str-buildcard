@@ -1,0 +1,6 @@
+[submodule "submodule/StarRailScore"]
+	path = submodule/StarRailScore
+	url = https://github.com/Mar-7th/StarRailScore.git
+[submodule "submodule/StarRailRes"]
+	path = submodule/StarRailRes
+	url = https://github.com/Mar-7th/StarRailRes.git

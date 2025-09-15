@@ -66,7 +66,7 @@ export async function renderImg(data: charData): Promise<any> {
       ctx.drawImage(img, 50, 810, 160.5, 199);
     }
     {
-      const img = (await loadImage("../../StarRailRes/" + "icon/deco/Rarity" + data["light_cone"]["rarity"] + ".png")) as HTMLImageElement;
+      const img = (await loadImage("../../submodule/StarRailRes/" + "icon/deco/Rarity" + data["light_cone"]["rarity"] + ".png")) as HTMLImageElement;
       if (data["light_cone"]["rarity"] == 3) ctx.drawImage(img, -25, 950, img.width / 1.5, img.height / 1.5);
       else if (data["light_cone"]["rarity"] == 4) ctx.drawImage(img, -45, 950, img.width / 1.5, img.height / 1.5);
       else ctx.drawImage(img, -55, 950, img.width / 1.5, img.height / 1.5);
@@ -123,7 +123,7 @@ export async function renderImg(data: charData): Promise<any> {
       ctx.fillText(data["relics"][i]["main_affix"]["dis"], 1480, 155 + i * 170);
       ctx.fillRect(1530, 50 + i * 170, 5, 150);
       ctx.textAlign = "start";
-      const rarity = (await loadImage("../../StarRailRes/" + "icon/deco/Rarity" + data["relics"][i]["rarity"] + ".png")) as HTMLImageElement;
+      const rarity = (await loadImage("../../submodule/StarRailRes/" + "icon/deco/Rarity" + data["relics"][i]["rarity"] + ".png")) as HTMLImageElement;
       ctx.drawImage(rarity, 1180, 140 + i * 170, rarity.width / 2, rarity.height / 2);
       ctx.font = "25px 'kt'";
       ctx.fillStyle = "rgb(255, 255, 255)";
