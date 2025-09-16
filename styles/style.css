@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "kt";
-  src: url("/font/kt.ttf");
+  src: url("./font/kt.ttf");
 }
 
 body {
