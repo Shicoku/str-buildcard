@@ -7,9 +7,9 @@
 
     <title>ビルドカード生成機</title>
 
-    <link rel="icon" type="image/png" href="./assets/img/shicoku.png" />
-    <link rel="shortcut icon" type="image/png" href="./assets/img/shicoku.png" />
-    <link rel="apple-touch-icon" href="./assets/img/shicoku.png" />
+    <link rel="icon" type="image/png" href="/assets/img/shicoku.png" />
+    <link rel="shortcut icon" type="image/png" href="/assets/img/shicoku.png" />
+    <link rel="apple-touch-icon" href="/assets/img/shicoku.png" />
 
     <!--styles-->
     <link rel="stylesheet" href="styles/style.css" />
@@ -67,7 +67,7 @@
 
     <script>
       const header = document.getElementById("header");
-      fetch("./assets/includes/header.html")
+      fetch("/assets/includes/header.html")
         .then((res) => res.text())
         .then((html) => {
           header.innerHTML = html;

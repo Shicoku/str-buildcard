@@ -10,7 +10,8 @@
     "build": "tsc",
     "ts-watch": "tsc --watch",
     "dev": "nodemon tools/dev-proxy.js",
-    "start": "concurrently \"npm run ts-watch\" \"npm run dev\""
+    "start": "concurrently \"npm run ts-watch\" \"npm run dev\"",
+    "submodule": "git submodule update --init --recursive && git submodule update --remote --merge"
   },
   "keywords": [],
   "author": "",
