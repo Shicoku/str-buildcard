@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.terms {
+  margin-left: 10px;
+}
+.terms p {
+  font-size: 1.2rem;
+  margin-top: -20px;
+  margin-left: 15px;
+}
+.terms ul {
+  margin-bottom: 30px;
+}
+.terms ul li {
+  font-size: 1.2rem;
+}
+
+.link {
+  border-bottom: 2px solid #55ddff;
+  width: fit-content;
+}
+.link:hover {
+  color: #55ddff;
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    margin-top: 80px;
+  }
+
+  .terms {
+    margin-left: 2px;
+  }
+  .terms p {
+    font-size: 1.2rem;
+    margin-top: -20px;
+    margin-left: 5px;
+  }
+}

@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+body {
+  margin-left: 3%;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+canvas {
+  display: none;
+}

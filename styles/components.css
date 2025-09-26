@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.title {
+  font-size: 3em;
+  border-bottom: 2px solid #55ddff;
+  width: 97%;
+  margin-top: -10px;
+}
