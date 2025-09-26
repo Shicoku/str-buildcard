@@ -3,24 +3,29 @@ import { calculateScore } from "./utils/scorer.js";
 import { renderImg } from "./utils/renderImg.js";
 import { ApiError } from "./errors/ApiError.js";
 import { charData } from "./types/starrail.js";
+import { counter } from "./utils/counter.js";
 
 const loader = document.getElementById("loader") as HTMLElement;
 const bar = document.getElementById("progress") as HTMLElement;
 const circle = document.getElementById("countdownCircle") as HTMLElement;
+const cardBtn = document.getElementById("card-btn") as HTMLElement;
 
 let apiData: any = null;
 let selectedIndex: any = null;
 let isLock = false;
-let lockDuration = 30;
-let countdownInterval: any;
+let Index = 0;
 
 loader.style.display = "none";
 circle.style.display = "none";
+cardBtn.style.display = "none";
 
 async function getData(): Promise<any> {
   const uid = (document.getElementById("uid") as HTMLInputElement).value;
   const char = document.getElementById("char") as HTMLElement;
   const card = document.getElementById("card-img") as HTMLElement;
+  const log = document.getElementById("log") as HTMLElement;
+
+  log.innerHTML = "";
 
   if (isLock) return;
 
@@ -29,6 +34,7 @@ async function getData(): Promise<any> {
 
   char.innerHTML = "";
   card.innerHTML = "";
+  cardBtn.style.display = "none";
 
   try {
     const res = await fetch(`/api/mihomo?uid=${uid}`);
@@ -44,8 +50,9 @@ async function getData(): Promise<any> {
     apiData = data;
 
     if (data.error || !data.characters) {
-      loader.style.display = "flex";
-      char.innerHTML = `<p>Error: ${data.error}</p>`;
+      loader.style.display = "none";
+      console.error(data.error);
+      log.innerHTML = `<p>API Error: ${data.error}<br />データが見つかりませんでした。UIDをご確認の上、もう一度試してください。</p>`;
       return;
     }
 
@@ -76,43 +83,12 @@ async function getData(): Promise<any> {
       char.appendChild(wrapper);
     });
   } catch (err) {
-    loader.style.display = "flex";
-    char.innerHTML = `<p>Error: ${(err as Error).message}</p>`;
+    loader.style.display = "none";
+    log.innerHTML = `<p>API Error: ${(err as Error).message}<br />サーバーに何らかの障害が発生している可能性があります。時間を開けてもう一度試してください。</p>`;
+    console.error(err);
   }
 
-  const btn = document.getElementById("btn") as HTMLElement;
-  const fgCircle = document.querySelector(".fg") as HTMLElement;
-  const countText = document.querySelector(".count-text") as HTMLElement;
-
-  isLock = true;
-  btn.classList.add("locked");
-  let remaining = lockDuration;
-  circle.style.display = "flex";
-
-  fgCircle.style.transition = "none";
-  fgCircle.style.strokeDashoffset = "0";
-  countText.textContent = `${remaining}`;
-
-  setTimeout(() => {
-    fgCircle.style.transition = `stroke-dashoffset ${lockDuration}s linear`;
-    fgCircle.style.strokeDashoffset = "283";
-  }, 50);
-
-  countdownInterval = setInterval(() => {
-    remaining--;
-    countText.textContent = `${remaining}`;
-
-    if (remaining <= 0) {
-      clearInterval(countdownInterval);
-      countText.textContent = "";
-      fgCircle.style.transition = "none";
-      fgCircle.style.strokeDashoffset = "0";
-      circle.style.display = "none";
-
-      isLock = false;
-      btn.classList.remove("locked");
-    }
-  }, 1000);
+  counter();
 }
 
 function getCharData(index: number): Promise<charData | null> {
@@ -128,6 +104,11 @@ async function createCard(index: number, link: any): Promise<any> {
   const card = document.getElementById("card-img") as HTMLElement;
   const card_img = document.createElement("img");
   const buttons = document.querySelectorAll(".char_button");
+  const log = document.getElementById("log") as HTMLElement;
+
+  log.innerHTML = "";
+
+  Index = index;
 
   if (selectedIndex === index) return;
 
@@ -136,20 +117,75 @@ async function createCard(index: number, link: any): Promise<any> {
 
   selectedIndex = index;
 
-  buttons.forEach((btn) => btn.classList.remove("selected"));
-  link.classList.add("selected");
+  if (link !== null) {
+    buttons.forEach((btn) => btn.classList.remove("selected"));
+    link.classList.add("selected");
+  }
 
-  const data = await getCharData(index);
-  if (!data) return null;
-  const canvas = await renderImg(data);
+  try {
+    const data = await getCharData(index);
+    if (!data) return null;
+    const canvas = await renderImg(data);
 
-  loader.style.display = "none";
+    loader.style.display = "none";
+    cardBtn.style.display = "flex";
 
-  card_img.src = canvas.toDataURL("image/png");
-  card_img.className = "card-img";
-  card.innerHTML = "";
-  card.appendChild(card_img);
+    card_img.src = canvas.toDataURL("image/png");
+    card_img.className = "card-img";
+    card.innerHTML = "";
+    card.appendChild(card_img);
+  } catch (err) {
+    loader.style.display = "none";
+    console.error(err);
+    log.innerHTML = `<p>${err}<br />ビルドカードが生成できませんでした。もう一度試してください。</p>`;
+  }
+}
+
+async function reload(): Promise<any> {
+  const card = document.getElementById("card-img") as HTMLElement;
+  const card_img = document.createElement("img");
+  const log = document.getElementById("log") as HTMLElement;
+
+  log.innerHTML = "";
+  loader.style.display = "flex";
+  bar.style.display = "flex";
+
+  if (apiData === null) {
+    loader.style.display = "none";
+    log.innerHTML = `データがありません。`;
+    return;
+  }
+
+  try {
+    const data = await getCharData(Index);
+    if (!data) return null;
+    const canvas = await renderImg(data);
+
+    loader.style.display = "none";
+
+    card_img.src = canvas.toDataURL("image/png");
+    card_img.className = "card-img";
+    card.innerHTML = "";
+    card.appendChild(card_img);
+  } catch (err) {
+    loader.style.display = "none";
+    console.error(err);
+    log.innerHTML = `<p>${err}<br />ビルドカードが生成できませんでした。もう一度試してください。</p>`;
+  }
+}
+
+function downloadCard() {
+  const card_img = document.querySelector(".card-img") as HTMLImageElement;
+  if (!card_img) return;
+
+  const link = document.createElement("a");
+  link.href = card_img.src;
+  link.download = "starrail_build_card.png";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 (window as any).getData = getData;
-(window as any).createCard = createCard;
+(window as any).reload = reload;
+(window as any).downloadCard = downloadCard;

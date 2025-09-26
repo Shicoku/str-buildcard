@@ -34,8 +34,39 @@
 
     <div id="char"></div>
 
+    <div id="card-btn">
+      <div class="reload card-btn">
+        <a type="button" onclick="reload()">
+          <div>
+            <svg width="100" height="100" viewBox="0 0 100 100">
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0.2" refY="3.5" orient="auto">
+                  <polygon points="-2 0, 2 3.5, -2 7" fill="#55ddff" />
+                </marker>
+              </defs>
+
+              <path d="M50,70 A30,30 0 1,1 70,30" fill="none" stroke="#55ddff" stroke-width="10" marker-end="url(#arrowhead)" />
+            </svg>
+            <span>リロード</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="download card-btn">
+        <a type="button" onclick="downloadCard()">
+          <svg width="24" height="24" viewBox="0 0 24 24" stroke="#55ddff" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="15" />
+            <polyline points="6 11 12 17 18 11" />
+            <line x1="5" y1="19" x2="19" y2="19" />
+          </svg>
+          <span>ダウンロード</span>
+        </a>
+      </div>
+    </div>
+
     <div><canvas id="card" width="1920" height="1080"></canvas></div>
     <div id="card-img"></div>
+    <div id="log"></div>
 
     <div id="loader">
       <div class="spinner-box">
