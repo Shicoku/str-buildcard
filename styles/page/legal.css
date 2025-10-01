@@ -15,15 +15,6 @@
   font-size: 1.2rem;
 }
 
-.link {
-  border-bottom: 2px solid #55ddff;
-  width: fit-content;
-}
-.link:hover {
-  color: #55ddff;
-  opacity: 0.5;
-}
-
 @media screen and (max-width: 480px) {
   body {
     margin-top: 80px;

@@ -6,3 +6,12 @@
   width: 97%;
   margin-top: -10px;
 }
+
+.link {
+  border-bottom: 2px solid #55ddff;
+  width: fit-content;
+}
+.link:hover {
+  color: #55ddff;
+  opacity: 0.5;
+}

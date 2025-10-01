@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ビルドカード生成機</title>
+
+    <link rel="icon" type="image/png" href="/assets/img/shicoku.png" />
+    <link rel="shortcut icon" type="image/png" href="/assets/img/shicoku.png" />
+    <link rel="apple-touch-icon" href="/assets/img/shicoku.png" />
+
+    <!--styles-->
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/page/faq.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <div class="faq-container">
+      <h1 class="title">よくある質問</h1>
+
+      <details class="qa">
+        <summary>キャラが更新されない</summary>
+        <p>ゲーム内でキャラを変更してから5分程度のタイムラグがあります。時間を開けて再度試してください。</p>
+      </details>
+      <details class="qa">
+        <summary>APIエラーが発生する</summary>
+        <p>ゲームの更新時には一時的にAPIがダウンすることがあります。また、サーバー側の不具合の場合もあります。<br />しばらく経つと復帰するので、時間を開けて再度試してください。</p>
+      </details>
+      <details class="qa">
+        <summary>使い方がわからない</summary>
+        <p><a href="help/usage.html" class="link">使い方</a>を参照してください。<br />それでもわからない場合は<a href="feedback.html" class="link">お問い合わせ</a>にてお伝えください。</p>
+      </details>
+      <details class="qa">
+        <summary>ゲームアップデート後に使えない</summary>
+        <p>ゲームの更新から対応には多少の時間がかかります。対応までお待ちください</p>
+      </details>
+      <details class="qa">
+        <summary>個人情報の取扱について</summary>
+        <p>
+          <a href="legal/privacy.html" class="link">プライバシーポリシー</a>で定めているように、本サービスでは個人情報の一切について取得・送信されません。
+          <br />UIDからは公開情報のみを取得しているため、個人情報は含まれません。
+        </p>
+      </details>
+      <details class="qa">
+        <summary>フィードバックを送りたい</summary>
+        <p>
+          フィードバックや質問については、<a href="feedback.html" class="link">お問い合わせ</a>を参照してください。
+          <br />こちらのフォームでは完全匿名で送信できます。返信が欲しい場合はメールアドレスも含めることができます。 <br />ただし、返信はこちらが必要と判断した場合のみします。
+        </p>
+      </details>
+    </div>
+
+    <script>
+      const header = document.getElementById("header");
+      fetch("/assets/includes/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          header.innerHTML = html;
+
+          const page = location.pathname.split("/");
+          const links = header.querySelectorAll("a[data-page]");
+          links.forEach((link) => {
+            if (link.getAttribute("data-page") === page[1].replace(".html", "")) {
+              link.classList.add("here");
+            }
+          });
+        });
+    </script>
+  </body>
+</html>
