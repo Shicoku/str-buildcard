@@ -7,7 +7,8 @@ module.exports = async (req, res) => {
 
   try {
     const response = await fetch(`https://api.mihomo.me/sr_info_parsed/${uid}?lang=${lang}`);
-    res.json(response.data);
+    const data = await response.json();
+    res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch data from mihomo", details: error.message });
   }
