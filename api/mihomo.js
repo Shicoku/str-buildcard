@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios";
 
 module.exports = async (req, res) => {
   const { uid, lang = "jp" } = req.query;
