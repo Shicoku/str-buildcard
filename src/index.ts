@@ -4,6 +4,7 @@ import { renderImg } from "./utils/renderImg.js";
 import { ApiError } from "./errors/ApiError.js";
 import { charData } from "./types/starrail.js";
 import { counter } from "./utils/counter.js";
+import { getWightData } from "./utils/getWightData.js";
 
 const loader = document.getElementById("loader") as HTMLElement;
 const bar = document.getElementById("progress") as HTMLElement;
@@ -19,11 +20,14 @@ loader.style.display = "none";
 circle.style.display = "none";
 cardBtn.style.display = "none";
 
+const parts: Record<string, string> = { "1": "頭", "2": "手", "3": "胴体", "4": "足", "5": "オーブ", "6": "縄" };
+
 async function getData(): Promise<any> {
   const uid = (document.getElementById("uid") as HTMLInputElement).value;
   const char = document.getElementById("char") as HTMLElement;
   const card = document.getElementById("card-img") as HTMLElement;
   const log = document.getElementById("log") as HTMLElement;
+  const status = document.getElementById("status") as HTMLElement;
 
   log.innerHTML = "";
 
@@ -34,6 +38,7 @@ async function getData(): Promise<any> {
 
   char.innerHTML = "";
   card.innerHTML = "";
+  status.innerHTML = "";
   cardBtn.style.display = "none";
 
   try {
@@ -82,6 +87,7 @@ async function getData(): Promise<any> {
       wrapper.appendChild(button);
       char.appendChild(wrapper);
     });
+    status.innerHTML = `<p>UID: ${data.player.uid}<br />ニックネーム: ${data.player.nickname}<br />レベル: ${data.player.level}</p>`;
   } catch (err) {
     loader.style.display = "none";
     log.innerHTML = `<p>API Error: ${(err as Error).message}<br />サーバーに何らかの障害が発生している可能性があります。時間を開けてもう一度試してください。</p>`;
@@ -105,6 +111,7 @@ async function createCard(index: number, link: any): Promise<any> {
   const card_img = document.createElement("img");
   const buttons = document.querySelectorAll(".char_button");
   const log = document.getElementById("log") as HTMLElement;
+  const status = document.getElementById("status") as HTMLElement;
 
   log.innerHTML = "";
 
@@ -134,6 +141,9 @@ async function createCard(index: number, link: any): Promise<any> {
     card_img.className = "card-img";
     card.innerHTML = "";
     card.appendChild(card_img);
+    const weightData = getWightData(data);
+    const foo = formatData(await weightData);
+    status.innerHTML += `<p>${foo}</p>`;
   } catch (err) {
     loader.style.display = "none";
     console.error(err);
@@ -184,6 +194,30 @@ function downloadCard() {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}
+
+function formatData(data: any): string {
+  let output = "";
+  output += "共通:<br />";
+  for (const [key, value] of Object.entries(data.weight)) {
+    if (value !== 0) {
+      output += `${key}: ${value}<br />`;
+    }
+  }
+  output += "<br />";
+  for (const [partKey, partName] of Object.entries(parts)) {
+    if (partKey === "1" || partKey === "2") continue;
+    const partData = data.main[partKey];
+    if (!partData) continue;
+    output += `${partName}:<br />`;
+    for (const [key, value] of Object.entries(partData)) {
+      if (value !== 0) {
+        output += `${key}: ${value}<br />`;
+      }
+    }
+    output += "<br />";
+  }
+  return output.trim();
 }
 
 (window as any).getData = getData;

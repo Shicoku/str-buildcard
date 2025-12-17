@@ -199,9 +199,9 @@ export async function renderImg(data: charData): Promise<any> {
   else if (data["total_score"] >= 240) scoreRank = "B";
   else if (data["total_score"] >= 60) scoreRank = "C";
   ctx.font = '130px "kt"';
-  ctx.fillText(scoreRank, 920, 1030);
+  ctx.fillText(scoreRank, 940, 1030);
   ctx.strokeStyle = "rgb(255, 255, 255)";
-  ctx.strokeText(scoreRank, 920, 1030);
+  ctx.strokeText(scoreRank, 940, 1030);
 
   progress(bar, 90);
 
@@ -215,10 +215,11 @@ export async function renderImg(data: charData): Promise<any> {
       ctx.strokeStyle = "rgb(255, 255, 255)";
       ctx.strokeText("Score", 1795, 90 + i * 170);
       ctx.font = '35px "kt"';
+      ctx.textAlign = "center";
       const relic = data.relics?.[i];
       if (relic && typeof relic.score === "string") {
-        ctx.fillText(relic.score, 1800, 130 + i * 170);
-        ctx.strokeText(relic.score, 1800, 130 + i * 170);
+        ctx.fillText(relic.score, 1840, 130 + i * 170);
+        ctx.strokeText(relic.score, 1840, 130 + i * 170);
       }
       let scoreRank = "D";
       const score = Number(data.relics?.[i].score);
@@ -227,8 +228,9 @@ export async function renderImg(data: charData): Promise<any> {
       else if (score >= 60) scoreRank = "A";
       else if (score >= 40) scoreRank = "B";
       else if (score >= 10) scoreRank = "C";
-      ctx.fillText(scoreRank, 1830, 180 + i * 170);
-      ctx.strokeText(scoreRank, 1830, 180 + i * 170);
+      ctx.fillText(scoreRank, 1840, 180 + i * 170);
+      ctx.strokeText(scoreRank, 1840, 180 + i * 170);
+      ctx.textAlign = "start";
     }
   }
 

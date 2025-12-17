@@ -1,14 +1,24 @@
-const livereload = require("livereload");
-const connectLivereload = require("connect-livereload");
-const express = require("express");
-const path = require("path");
-const cors = require("cors");
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+// dev-proxy.js (ESM版)
+
+import livereload from "livereload";
+import connectLivereload from "connect-livereload";
+import express from "express";
+import path from "path";
+import cors from "cors";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+
+// __dirname を ESM で使えるようにする
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config();
 
 const app = express();
 const PORT = 3000;
 
+// LiveReload サーバー
 const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, ".."));
 
@@ -17,6 +27,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..")));
 
+// Mihomo API プロキシ
 app.get("/api/mihomo", async (req, res) => {
   const { uid, lang = "jp" } = req.query;
   const url = `https://api.mihomo.me/sr_info_parsed/${uid}?lang=${lang}`;
@@ -30,6 +41,7 @@ app.get("/api/mihomo", async (req, res) => {
   }
 });
 
+// フィードバック送信
 app.post("/api/feedback", async (req, res) => {
   const { name, email, message } = req.body;
 
@@ -52,11 +64,12 @@ app.post("/api/feedback", async (req, res) => {
     });
     res.status(200).send("送信完了");
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).send("送信失敗");
   }
 });
 
+// サーバー起動
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`テストプロキシ起動中: http://localhost:${PORT}`);
 });
