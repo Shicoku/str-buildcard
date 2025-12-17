@@ -27,7 +27,7 @@ async function getData(): Promise<any> {
   const char = document.getElementById("char") as HTMLElement;
   const card = document.getElementById("card-img") as HTMLElement;
   const log = document.getElementById("log") as HTMLElement;
-  const status = document.getElementById("status") as HTMLElement;
+  const profile = document.getElementById("profile") as HTMLElement;
 
   log.innerHTML = "";
 
@@ -38,7 +38,7 @@ async function getData(): Promise<any> {
 
   char.innerHTML = "";
   card.innerHTML = "";
-  status.innerHTML = "";
+  profile.innerHTML = "";
   cardBtn.style.display = "none";
 
   try {
@@ -87,7 +87,7 @@ async function getData(): Promise<any> {
       wrapper.appendChild(button);
       char.appendChild(wrapper);
     });
-    status.innerHTML = `<p>UID: ${data.player.uid}<br />ニックネーム: ${data.player.nickname}<br />レベル: ${data.player.level}</p>`;
+    profile.innerHTML = `<p>UID: ${data.player.uid}<br />ニックネーム: ${data.player.nickname}<br />レベル: ${data.player.level}</p>`;
   } catch (err) {
     loader.style.display = "none";
     log.innerHTML = `<p>API Error: ${(err as Error).message}<br />サーバーに何らかの障害が発生している可能性があります。時間を開けてもう一度試してください。</p>`;
@@ -143,7 +143,7 @@ async function createCard(index: number, link: any): Promise<any> {
     card.appendChild(card_img);
     const weightData = getWightData(data);
     const foo = formatData(await weightData);
-    status.innerHTML += `<p>${foo}</p>`;
+    status.innerHTML = `<p>${foo}</p>`;
   } catch (err) {
     loader.style.display = "none";
     console.error(err);
